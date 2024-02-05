@@ -9,6 +9,7 @@ terraform init
 terraform validate
 terraform plan
 terraform apply
+
 ```
 
 ##Logging into ec2-instance
