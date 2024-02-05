@@ -35,19 +35,18 @@ sudo yum install docker
 ___
 ```bash
 aws ecr get-login-password --region us-east-1 | sudo docker login -u AWS  --password-stdin 945233852280.dkr.ecr.us-east-1.amazonaws.com/mysqlrepo
-aws ecr get-login-password --region us-east-1 | sudo docker login -u AWS  --password-stdin 945233852280.dkr.ecr.us-east-1.amazonaws.com/apprepo
 ```
 
 ##Configuring permisiions
 ___
 ```bash
-sudo chmod 666 /var/run/docker.sock
+sudo usermod -a -G docker ec2-user
 ```
 
 ##Creating custom bridge network
 ___
 ```bash
-docker create network net
+docker network create net --subnet 111.111.0.0/24 --driver bridge
 ```
 
 ##Running mysql container
@@ -58,7 +57,7 @@ sudo docker run  --network net -d -e  MYSQL_ROOT_PASSWORD=pw 945233852280.dkr.ec
 ##Environment variables for the application
 ___
 ```bash
-export DBHOST=172.17.0.2
+export DBHOST=111.111.0.2
 export DBPORT=3306
 export DBUSER=root
 export DATABASE=employees
