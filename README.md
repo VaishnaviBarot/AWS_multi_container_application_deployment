@@ -1,4 +1,47 @@
-## CLO835_Assignment1
+# Deploying Multi-Container Application using Terraform, Docker, and GitHub Actions on AWS EC2
+
+This project demonstrates the deployment of a multi-container application using Terraform, AWS EC2, Docker, and GitHub Actions. It includes the configuration of a MySQL database and multiple application instances running in isolated Docker containers, communicating within a custom Docker bridge network. Additionally, GitHub Actions is used to automate building and pushing Docker images to Amazon Elastic Container Registry (ECR).
+
+## Key Features:
+1. **Infrastructure Provisioning with Terraform**:
+    - Generate SSH keys.
+    - Use Terraform to initialize, validate, and deploy an EC2 instance.
+
+2. **EC2 Instance Configuration**:
+    - SSH into the EC2 instance using the generated key.
+    - Set up AWS credentials and install Docker.
+
+3. **Docker Setup**:
+    - Create a custom Docker bridge network for container communication.
+    - Run a MySQL container and multiple application containers with different environment configurations.
+
+4. **GitHub Actions Workflow for CI/CD**:
+    - Automates the build and push process for Docker images to Amazon ECR on every push to the `main` branch.
+    - **Builds and pushes two Docker images**:
+        - The main application image.
+        - The MySQL database image.
+
+## GitHub Actions Workflow:
+- **Triggered on Push**:
+    - The workflow runs on every push to the `main` branch.
+- **Job: Build and Push Images**:
+    - **Login to Amazon ECR**: Uses AWS credentials from GitHub secrets.
+    - **Install Dependencies**: Ensures the correct dependencies are installed for building the Docker images.
+    - **Build and Push Application and MySQL Images**: Builds the Docker images for both the main application and MySQL, then pushes them to ECR.
+
+## Application Environment:
+- **Database**: MySQL
+- **Application**: Multiple instances of a custom application with color-specific environments (blue, pink, lime).
+
+## Commands Used:
+- Terraform for infrastructure provisioning.
+- Docker for building and running containers.
+- AWS CLI for ECR login.
+- GitHub Actions for continuous integration and deployment.
+
+## Usage:
+Follow the provided Terraform and Docker scripts, along with the GitHub Actions workflow, to provision infrastructure, set up containers, and automate image deployment to ECR.
+
 ___
 
 Running Terraform
